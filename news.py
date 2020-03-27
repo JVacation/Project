@@ -44,7 +44,6 @@ class News(Frame):
 class NewsHeadline(Frame):
     def __init__(self, parent, event_name=""):
         Frame.__init__(self, parent, bg='black')
-
         image = Image.open("assets/Newspaper.png")
         image = image.resize((25, 25), Image.ANTIALIAS)
         image = image.convert('RGB')

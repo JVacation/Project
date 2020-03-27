@@ -62,11 +62,13 @@ class FullscreenWindow:
            self.weather = weather.Weather(getattr(self, weatherFrame))
            self.weather.pack(side=weatherSide, anchor=N, padx=100, pady=60)
         # news
-        if newsCheckbox == 'enable':
-           self.news = news.News(getattr(self, newsFrame))
-           self.news.pack(side=newsSide, anchor=S, padx=100, pady=60)
+        #if newsCheckbox == 'enable':
+          # self.news = news.News(getattr(self, newsFrame))
+           #self.news.pack(side=newsSide, anchor=S, padx=100, pady=60)
 
         self.cam =  cam.Cam(self.bottomFrame)
+        self.cam.pack(side=LEFT, anchor=S, padx=60, pady=60)
+        self.cam = cam.NewsHeadline(self.bottomFrame)
         self.cam.pack(side=RIGHT, anchor=S, padx=60, pady=60)
 
     def toggle_fullscreen(self, event=None):
