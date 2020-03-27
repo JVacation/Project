@@ -3,6 +3,7 @@ import face_recognition
 import os
 
 # Load the jpg file into a numpy array
+i = 1
 for filename in os.listdir('./public/images/Tests'):
     image = face_recognition.load_image_file("./public/images/Tests/"+filename)
 
@@ -12,7 +13,6 @@ for filename in os.listdir('./public/images/Tests'):
     face_locations = face_recognition.face_locations(image)
 
     print("I found {} face(s) in this photograph.".format(len(face_locations)))
-
     for face_location in face_locations:
 
     # Print the location of each face in this image
@@ -23,3 +23,5 @@ for filename in os.listdir('./public/images/Tests'):
         face_image = image[top:bottom, left:right]
         pil_image = Image.fromarray(face_image)
         pil_image.show()
+        pil_image = pil_image.save("./facialreq/stored/face_" + str(i) + ".jpeg")
+        i = i + 1

@@ -5,7 +5,7 @@
 from Tkinter import *
 import locale,threading
 from PIL import Image, ImageTk
-import clock, news, weather
+import clock, news, weather, cam, stock
 import json
 
 # maps open weather icons to
@@ -66,6 +66,9 @@ class FullscreenWindow:
            self.news = news.News(getattr(self, newsFrame))
            self.news.pack(side=newsSide, anchor=S, padx=100, pady=60)
 
+        self.cam =  cam.Cam(self.bottomFrame)
+        self.cam.pack(side=RIGHT, anchor=S, padx=60, pady=60)
+
     def toggle_fullscreen(self, event=None):
         self.state = not self.state  # Just toggling the boolean
         self.tk.attributes("-fullscreen", self.state)
@@ -75,6 +78,7 @@ class FullscreenWindow:
         self.state = False
         self.tk.attributes("-fullscreen", False)
         return "break"
+
 
 if __name__ == '__main__':
     w = FullscreenWindow()
