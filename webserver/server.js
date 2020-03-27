@@ -8,10 +8,12 @@ const PORT = process.env.PORT || 3000;
 var express = require('express');
 var bodyParser = require('body-parser');
 var multer = require('multer')
+let {PythonShell} = require('python-shell')
 var app = express();
 var fs = require('fs');
-var filepath = "./public/Images/";
+var filepath = "./public/images/";
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
+
 
 app.get('/', function (req, res) {
     res.sendFile(INDEX)
@@ -19,6 +21,7 @@ app.get('/', function (req, res) {
 
 app.post('/contact', urlencodedParser, function (req, res) {
     console.log(req.body);
+    filepath = "./public/images/";
     var result = JSON.stringify(req.body)
     var ar = result.split(",");
     var store = ar[0];
@@ -50,7 +53,7 @@ var Storage = multer.diskStorage({
         callback(null, filepath);
     },
     filename: function(req, file, callback) {
-        callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
+        callback(null, Date.now() + "_" + file.originalname);
     }
 });
 
@@ -61,9 +64,13 @@ var upload = multer({
 app.post("/api/Upload", function(req, res) {
      upload(req, res, function(err) {
          if (err) {
-             return res.end("Something went wrong!");
+             return res.end("Something went wrong! Please navigate back to the previous page and try again");
          }
-         return res.end("File uploaded sucessfully!.");
+         PythonShell.run('facial.py', null, function (err){
+            if (err) throw err;
+            console.log('finished');
+        });
+         return res.end("File(s) uploaded sucessfully!.");
      });
  });
  

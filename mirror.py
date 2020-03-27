@@ -26,7 +26,7 @@ icon_lookup = {
     'hail': "assests/Hail.png"  # hail
 }
 
-jsonfile = 'test'
+jsonfile = 'constant'
 
 with open('./json/' + jsonfile + '.json') as json_file:
      data = json.load(json_file)

@@ -5,13 +5,13 @@ from contextlib import contextmanager
 
 LOCALE_LOCK = threading.Lock()
 
-ui_locale = '' # e.g. 'fr_FR' fro French, '' as default
 time_format = 24 # 12 or 24
 date_format = "%d %b, %Y" # check python doc for strftime() for options
-xlarge_text_size = 94
-large_text_size = 48
-medium_text_size = 28
-small_text_size = 18
+xlText = 94
+largeText = 48
+mediumText = 28
+smallText = 18
+timeZone = '' # e.g. 'fr_FR' fro French, '' as default
 
 @contextmanager
 def setlocale(name): #thread proof function to work with locale
@@ -25,22 +25,22 @@ def setlocale(name): #thread proof function to work with locale
 class Clock(Frame):
     def __init__(self, parent, *args, **kwargs):
         Frame.__init__(self, parent, bg='black')
-        # initialize time label
-        self.time1 = ''
-        self.timeLbl = Label(self, font=('Helvetica', large_text_size), fg="white", bg="black")
-        self.timeLbl.pack(side=TOP, anchor=E)
         # initialize day of week
         self.day_of_week1 = ''
-        self.dayOWLbl = Label(self, text=self.day_of_week1, font=('Helvetica', small_text_size), fg="white", bg="black")
-        self.dayOWLbl.pack(side=TOP, anchor=E)
-        # initialize date label
+        self.dayOWLbl = Label(self, text=self.day_of_week1, font=('Helvetica', smallText), fg="white", bg="black")
+        self.dayOWLbl.pack(side=TOP)
+        # initialize date
         self.date1 = ''
-        self.dateLbl = Label(self, text=self.date1, font=('Helvetica', small_text_size), fg="white", bg="black")
-        self.dateLbl.pack(side=TOP, anchor=E)
+        self.dateLbl = Label(self, text=self.date1, font=('Helvetica', smallText), fg="white", bg="black")
+        self.dateLbl.pack()
+        # initialize date time
+        self.time1 = ''
+        self.timeLbl = Label(self, font=('Helvetica', largeText), fg="white", bg="black")
+        self.timeLbl.pack(side=TOP)
         self.tick()
 
     def tick(self):
-        with setlocale(ui_locale):
+        with setlocale(timeZone):
             if time_format == 12:
                 time2 = time.strftime('%I:%M %p') #hour in 12h format
             else:
