@@ -68,8 +68,6 @@ class FullscreenWindow:
 
         self.cam =  cam.Cam(self.bottomFrame)
         self.cam.pack(side=LEFT, anchor=S, padx=60, pady=60)
-        self.cam = cam.NewsHeadline(self.bottomFrame)
-        self.cam.pack(side=RIGHT, anchor=S, padx=60, pady=60)
 
     def toggle_fullscreen(self, event=None):
         self.state = not self.state  # Just toggling the boolean
