@@ -21,7 +21,7 @@ known_face_encodings = [
     biden_face_encoding
 ]
 known_face_names = [
-    "Barack Obama",
+    "Nonce",
     "Joe Biden"
 ]
 
@@ -35,10 +35,12 @@ class Cam(Frame):
     def __init__(self, parent, *args, **kwargs):
         Frame.__init__(self, parent, bg='black')
         self.title = "No User Detected"
+        # Displays the name of detected user
         self.userName = Label(self, text=self.title, font=('Helvetica', medium_text_size), fg="white", bg="black")
         self.userName.pack(side=TOP, anchor=W)
         self.lmain = Label(self)
-        self.lmain.pack(side=TOP)
+        # Enable camera preview
+        #self.lmain.pack(side=TOP) 
         self.video()
 
     def video(self):
