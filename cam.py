@@ -34,14 +34,17 @@ face_names = []
 class Cam(Frame):
     def __init__(self, parent, *args, **kwargs):
         Frame.__init__(self, parent, bg='black')
-        self.title = "No User Detected"
+        self.title = "Unknown"
         # Displays the name of detected user
         self.userName = Label(self, text=self.title, font=('Helvetica', medium_text_size), fg="white", bg="black")
-        self.userName.pack(side=TOP, anchor=W)
+        self.userName.pack(side=TOP, anchor=CENTER)
         self.lmain = Label(self)
         # Enable camera preview
-        #self.lmain.pack(side=TOP) 
+        self.lmain.pack(side=TOP) 
         self.video()
+    
+    def readUserName(self):
+        return self.userName.cget("text")
 
     def video(self):
         process_this_frame = True
