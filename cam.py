@@ -55,6 +55,8 @@ class Cam(Frame):
             face_locations = face_recognition.face_locations(rgb_small_frame)
             face_encodings = face_recognition.face_encodings(rgb_small_frame, face_locations)
             face_names = []
+            name = "No User Detected"
+            self.userName.config(text = name)
             for face_encoding in face_encodings:
                 matches = face_recognition.compare_faces(known_face_encodings, face_encoding)
                 name = "Unknown"

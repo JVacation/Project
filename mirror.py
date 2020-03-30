@@ -3,29 +3,11 @@
 # requests, feedparser, traceback, Pillow
 
 from Tkinter import *
+from mttkinter import mtTkinter as tk
 import locale,threading
 from PIL import Image, ImageTk
 import clock, news, weather, cam, stock
 import json, time
-
-# maps open weather icons to
-# icon reading is not impacted by the 'lang' parameter
-icon_lookup = {
-    'clear-day': "assets/Sun.png",  # clear sky day
-    'wind': "assets/Wind.png",   #wind
-    'cloudy': "assets/Cloud.png",  # cloudy day
-    'partly-cloudy-day': "assets/PartlySunny.png",  # partly cloudy day
-    'rain': "assets/Rain.png",  # rain day
-    'snow': "assets/Snow.png",  # snow day
-    'snow-thin': "assets/Snow.png",  # sleet day
-    'fog': "assets/Haze.png",  # fog day
-    'clear-night': "assets/Moon.png",  # clear sky night
-    'partly-cloudy-night': "assets/PartlyMoon.png",  # scattered clouds night
-    'thunderstorm': "assets/Storm.png",  # thunderstorm
-    'tornado': "assests/Tornado.png",    # tornado
-    'hail': "assests/Hail.png"  # hail
-}
-
 
 getName = ""
 
@@ -58,7 +40,7 @@ class FullscreenWindow:
     def getUserName(self):
         getName = self.cam.readUserName()
         print getName
-        if getName == "Unknown":
+        if getName == "Unknown" or getName == "No User Detected":
             self.tk.after(5000, self.getUserName)
         else:
             jsonfile = getName
@@ -74,6 +56,7 @@ class FullscreenWindow:
                 newsCheckbox = (p['newsCheckbox'])
                 newsFrame = (p['newsFrame'])
                 newsSide = (p['newsSide'])
+            self.cam.pack_forget()
             #clock
             if clockCheckbox == 'enable': 
                 self.clock = clock.Clock(getattr(self, clockFrame))
@@ -86,9 +69,18 @@ class FullscreenWindow:
             if newsCheckbox == 'enable':
                 self.news = news.News(getattr(self, newsFrame))
                 self.news.pack(side=newsSide, anchor=S, padx=100, pady=60)
-            self.cam.pack_forget()
+            self.checkStillViewing()
 
-
+    def checkStillViewing(self):
+        if self.cam.readUserName() == "No User Detected":
+            print "NO USER"
+            self.clock.pack_forget()
+            self.weather.pack_forget()
+            self.news.pack_forget()
+            self.cam.pack(side=TOP, anchor=CENTER, padx=100, pady=60)
+            self.getUserName()
+        else:
+            self.tk.after(20000, self.checkStillViewing)
 
 if __name__ == '__main__':
     w = FullscreenWindow()
