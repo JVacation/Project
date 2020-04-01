@@ -1,4 +1,4 @@
-from Tkinter import *
+from tkinter import *
 import locale,threading,time,requests,json,traceback,feedparser
 from PIL import Image, ImageTk
 from contextlib import contextmanager

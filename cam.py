@@ -1,8 +1,9 @@
-from Tkinter import *
+from tkinter import *
 from PIL import ImageTk, Image
 import cv2
 import face_recognition
 import numpy as np
+from numpy import savetxt
 
 
 # Capture from camera
@@ -29,6 +30,8 @@ known_face_names = [
 face_locations = []
 face_encodings = []
 face_names = []
+
+savetxt('data.csv', known_face_encodings, delimiter=',')
 # function for video streaming
 
 class Cam(Frame):

@@ -2,11 +2,11 @@
 # requirements
 # requests, feedparser, traceback, Pillow
 
-from Tkinter import *
-from mttkinter import mtTkinter as tk
+from tkinter import *
+#from mttkinter import mtTkinter as tk
 import locale,threading
 from PIL import Image, ImageTk
-import clock, news, weather, cam, stock
+import clock, news, weather, cam
 import json, time
 
 getName = ""
@@ -39,7 +39,7 @@ class FullscreenWindow:
 
     def getUserName(self):
         getName = self.cam.readUserName()
-        print getName
+        print (getName)
         if getName == "Unknown" or getName == "No User Detected":
             self.tk.after(5000, self.getUserName)
         else:
@@ -73,7 +73,7 @@ class FullscreenWindow:
 
     def checkStillViewing(self):
         if self.cam.readUserName() == "No User Detected":
-            print "NO USER"
+            print ("NO USER")
             self.clock.pack_forget()
             self.weather.pack_forget()
             self.news.pack_forget()

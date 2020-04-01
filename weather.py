@@ -1,4 +1,4 @@
-from Tkinter import *
+from tkinter import *
 import requests,json,traceback
 from PIL import Image, ImageTk
 
@@ -85,7 +85,7 @@ class Weather(Frame):
             r = requests.get(weather_req_url)
             weather_obj = json.loads(r.text)
 
-            degree_sign= u'\N{DEGREE SIGN}'
+            degree_sign= '\N{DEGREE SIGN}'
             temperature2 = "%s%s" % (str(int(weather_obj['currently']['temperature'])), degree_sign)
             currently2 = weather_obj['currently']['summary']
             forecast2 = weather_obj["hourly"]["summary"]
@@ -128,7 +128,7 @@ class Weather(Frame):
                     self.locationLbl.config(text=location2)
         except Exception as e:
             traceback.print_exc()
-            print "Error: %s. Cannot get weather." % e
+            print (("Error: %s. Cannot get weather." % e))
 
         self.after(600000, self.get_weather)
 
