@@ -11,12 +11,6 @@ from numpy import savetxt
 # Capture from camera
 cap = cv2.VideoCapture(0)
 medium_text_size = 28
-obama_image = face_recognition.load_image_file("obama.jpg")
-obama_face_encoding = face_recognition.face_encodings(obama_image)[0]
-
-# Load a second sample picture and learn how to recognize it.
-biden_image = face_recognition.load_image_file("biden.jpg")
-biden_face_encoding = face_recognition.face_encodings(biden_image)[0]
 
 with open('./webserver/dataset_faces.dat', 'rb') as f:
         all_face_encodings = pickle.load(f)
