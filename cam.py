@@ -1,8 +1,10 @@
 from tkinter import *
 from PIL import ImageTk, Image
 import cv2
+import csv
 import face_recognition
 import numpy as np
+import pickle
 from numpy import savetxt
 
 
@@ -16,22 +18,20 @@ obama_face_encoding = face_recognition.face_encodings(obama_image)[0]
 biden_image = face_recognition.load_image_file("biden.jpg")
 biden_face_encoding = face_recognition.face_encodings(biden_image)[0]
 
-# Create arrays of known face encodings and their names
-known_face_encodings = [
-    obama_face_encoding,
-    biden_face_encoding
-]
-known_face_names = [
-    "Nonce",
-    "Joe Biden"
-]
+with open('./webserver/dataset_faces.dat', 'rb') as f:
+        all_face_encodings = pickle.load(f)
+
+# Create arrays of known face encodings and their names from the datafile
+known_face_encodings = np.array(list(all_face_encodings.values()))
+
+# Creates a list of the names from the datafile
+known_face_names = list(all_face_encodings.keys())
 
 # Initialize some variables
 face_locations = []
 face_encodings = []
 face_names = []
 
-savetxt('data.csv', known_face_encodings, delimiter=',')
 # function for video streaming
 
 class Cam(Frame):
