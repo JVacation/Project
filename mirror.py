@@ -8,8 +8,17 @@ import locale,threading
 from PIL import Image, ImageTk
 import clock, news, weather, cam
 import json, time
+from Naked.toolshed.shell import execute_js
 
 getName = ""
+
+class startWebServer (threading.Thread):
+    def __init__(self):
+      threading.Thread.__init__(self)
+    def run(self):
+      success = execute_js('./webserver/server.js')
+
+thread1 = startWebServer()
 
 class FullscreenWindow:
 
@@ -26,6 +35,7 @@ class FullscreenWindow:
         self.cam =  cam.Cam(self.topFrame)
         self.cam.pack(side=TOP, anchor=CENTER, padx=100, pady=60)
         self.getUserName()
+        thread1.start()
 
     def toggle_fullscreen(self, event=None):
         self.state = not self.state  # Just toggling the boolean

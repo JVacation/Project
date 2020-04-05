@@ -11,8 +11,9 @@ var multer = require('multer')
 let {PythonShell} = require('python-shell')
 var app = express();
 var fs = require('fs');
-var filepath = "./public/images/";
+var filepath = "./webserver/public/images/";
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
+
 
 
 app.get('/', function (req, res) {
@@ -21,13 +22,13 @@ app.get('/', function (req, res) {
 
 app.post('/contact', urlencodedParser, function (req, res) {
     console.log(req.body);
-    filepath = "./public/images/";
+    filepath = "./webserver/public/images/";
     var result = JSON.stringify(req.body)
     var ar = result.split(",");
     var store = ar[0];
     var nameArr = store.split(":");
     var name = nameArr[1];
-    var filename = "../json/" + name.slice(1, -1) + ".json"
+    var filename = "./json/" + name.slice(1, -1) + ".json"
     var string = "{" + name + ": [{"
     console.log(string);
     for( var i = 1; i < ar.length; ++i ) {
@@ -65,14 +66,19 @@ app.post("/api/Upload", function(req, res) {
      upload(req, res, function(err) {
          if (err) {
              return res.end("Something went wrong! Please navigate back to the previous page and try again");
-         }
-         PythonShell.run('facial.py', null, function (err){
-            if (err) throw err;
-            console.log('finished');
-        });
-         return res.end("File(s) uploaded sucessfully!.");
+         };
+         return res.redirect('../../complete.html');  
      });
  });
+
+app.post("/complete", function(req, res) {
+    PythonShell.run('./webserver/facial.py', null, function (err){
+        if (err) throw err;
+        console.log('finished');
+    })
+    res.redirect('index.html');
+});
+
  
 app.use(express.static(__dirname + '/public'))
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
