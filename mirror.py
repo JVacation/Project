@@ -6,11 +6,13 @@ from tkinter import *
 #from mttkinter import mtTkinter as tk
 import locale,threading
 from PIL import Image, ImageTk
-import clock, news, weather, cam
+import clock, news, weather, cam, stock, splash
 import json, time
 from Naked.toolshed.shell import execute_js
 
 getName = ""
+enableCameraPreview = "disable"
+xlarge_text_size = 94
 
 class startWebServer (threading.Thread):
     def __init__(self):
@@ -32,7 +34,9 @@ class FullscreenWindow:
         self.state = False
         self.tk.bind("<Return>", self.toggle_fullscreen)
         self.tk.bind("<Escape>", self.end_fullscreen)
-        self.cam =  cam.Cam(self.topFrame)
+        self.splash = splash.Splash(self.topFrame)
+        self.splash.pack(side=TOP, anchor=CENTER, padx=100, pady=60)
+        self.cam =  cam.Cam(self.topFrame, enableCameraPreview)
         self.cam.pack(side=TOP, anchor=CENTER, padx=100, pady=60)
         self.getUserName()
         thread1.start()
@@ -66,7 +70,12 @@ class FullscreenWindow:
                 newsCheckbox = (p['newsCheckbox'])
                 newsFrame = (p['newsFrame'])
                 newsSide = (p['newsSide'])
+                stockCheckbox = (p['stockCheckbox'])
+                stockFrame = (p['stockFrame'])
+                stockSide = (p['stockSide'])
+                stockList = (p['stockList'])
             self.cam.pack_forget()
+            self.splash.pack_forget()
             #clock
             if clockCheckbox == 'enable': 
                 self.clock = clock.Clock(getattr(self, clockFrame))
@@ -79,6 +88,10 @@ class FullscreenWindow:
             if newsCheckbox == 'enable':
                 self.news = news.News(getattr(self, newsFrame))
                 self.news.pack(side=newsSide, anchor=S, padx=100, pady=60)
+            #stock
+            if stockCheckbox == 'enable':
+                self.stock = stock.Stock(getattr(self, newsFrame), stockList)
+                self.stock.pack(side=stockSide, anchor=S, padx=100, pady=60)
             self.checkStillViewing()
 
     def checkStillViewing(self):
@@ -87,6 +100,8 @@ class FullscreenWindow:
             self.clock.pack_forget()
             self.weather.pack_forget()
             self.news.pack_forget()
+            self.stock.pack_forget()
+            self.splash.pack(side=TOP, anchor=CENTER, padx=100, pady=60)
             self.cam.pack(side=TOP, anchor=CENTER, padx=100, pady=60)
             self.getUserName()
         else:

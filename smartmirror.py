@@ -292,7 +292,7 @@ class listStocks(Frame):
         self.iconLbl.image = photo
         self.iconLbl.pack(side=LEFT, anchor=N)
         self.stockQuote = si.get_live_price(self.stockName)
-        self.eventNameLbl = Label(self, text=self.stockQuote, font=('Helvetica'), fg="white", bg="black")
+        self.eventNameLbl = Label(self, text=round(self.stockQuote, 3), font=('Helvetica', large_text_size), fg="white", bg="black")
         self.eventNameLbl.pack(side=LEFT, anchor=N)
 
 

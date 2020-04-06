@@ -29,7 +29,7 @@ face_names = []
 # function for video streaming
 
 class Cam(Frame):
-    def __init__(self, parent, *args, **kwargs):
+    def __init__(self, parent, event_name="", *args, **kwargs):
         Frame.__init__(self, parent, bg='black')
         self.title = "Unknown"
         # Displays the name of detected user
@@ -37,7 +37,8 @@ class Cam(Frame):
         self.userName.pack(side=TOP, anchor=CENTER)
         self.lmain = Label(self)
         # Enable camera preview
-        self.lmain.pack(side=TOP) 
+        if event_name == "enable":
+            self.lmain.pack(side=TOP) 
         self.video()
     
     def readUserName(self):
