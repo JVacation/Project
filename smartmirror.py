@@ -2,7 +2,7 @@
 # requirements
 # requests, feedparser, traceback, Pillow
 
-from Tkinter import *
+from tkinter import *
 import locale
 import threading
 import time
@@ -10,6 +10,7 @@ import requests
 import json
 import traceback
 import feedparser
+from yahoo_fin import stock_info as si
 
 from PIL import Image, ImageTk
 from contextlib import contextmanager
@@ -29,6 +30,8 @@ xlarge_text_size = 94
 large_text_size = 48
 medium_text_size = 28
 small_text_size = 18
+smallText = 18
+
 
 @contextmanager
 def setlocale(name): #thread proof function to work with locale
@@ -199,7 +202,7 @@ class Weather(Frame):
                     self.locationLbl.config(text=location2)
         except Exception as e:
             traceback.print_exc()
-            print "Error: %s. Cannot get weather." % e
+            print ("Error: %s. Cannot get weather." % e)
 
         self.after(600000, self.get_weather)
 
@@ -236,7 +239,7 @@ class News(Frame):
                 headline.pack(side=TOP, anchor=W)
         except Exception as e:
             traceback.print_exc()
-            print "Error: %s. Cannot get news." % e
+            print ("Error: %s. Cannot get news." % e)
 
         self.after(600000, self.get_headlines)
 
@@ -256,6 +259,40 @@ class NewsHeadline(Frame):
 
         self.eventName = event_name
         self.eventNameLbl = Label(self, text=self.eventName, font=('Helvetica', small_text_size), fg="white", bg="black")
+        self.eventNameLbl.pack(side=LEFT, anchor=N)
+
+class Stock(Frame):
+    def __init__(self, parent, *args, **kwargs):
+        Frame.__init__(self, parent, *args, **kwargs)
+        self.config(bg='black')
+        self.title = 'Stocks' # 'News' is more internationally generic
+        self.newsLbl = Label(self, text=self.title, font=('Helvetica', medium_text_size), fg="white", bg="black")
+        self.newsLbl.pack(side=TOP, anchor=W)
+        self.headlinesContainer = Frame(self, bg="black")
+        self.headlinesContainer.pack(side=TOP)
+        self.get_stocks()
+
+    def get_stocks(self):
+        stocks = listStocks(self.headlinesContainer, "amzn")
+        stocks.pack(side=TOP, anchor=W)
+        self.after(600000, self.get_stocks)
+
+
+class listStocks(Frame):
+    def __init__(self, parent, event_name=""):
+        Frame.__init__(self, parent, bg='black')
+        self.stockName = event_name
+        image = Image.open("assets/dollar.png")
+        image = image.resize((25, 25), Image.ANTIALIAS)
+        image = image.convert('RGB')
+        photo = ImageTk.PhotoImage(image)
+        self.stockNameLbl = Label(self, text=self.stockName, font=('Helvetica', smallText), fg="white", bg="black")
+        self.stockNameLbl.pack(side=TOP, anchor=N)
+        self.iconLbl = Label(self, bg='black', image=photo)
+        self.iconLbl.image = photo
+        self.iconLbl.pack(side=LEFT, anchor=N)
+        self.stockQuote = si.get_live_price(self.stockName)
+        self.eventNameLbl = Label(self, text=self.stockQuote, font=('Helvetica'), fg="white", bg="black")
         self.eventNameLbl.pack(side=LEFT, anchor=N)
 
 
@@ -311,6 +348,9 @@ class FullscreenWindow:
         # news
         self.news = News(self.bottomFrame)
         self.news.pack(side=LEFT, anchor=S, padx=100, pady=60)
+
+        self.stock = Stock(self.bottomFrame)
+        self.stock.pack(side=RIGHT, anchor=S, padx=100, pady=60)
         # calender - removing for now
         # self.calender = Calendar(self.bottomFrame)
         # self.calender.pack(side = RIGHT, anchor=S, padx=100, pady=60)
