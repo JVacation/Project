@@ -10,9 +10,9 @@ medium_text_size = 28
 small_text_size = 18
 
 class Splash(Frame):
-    def __init__(self, parent, *args, **kwargs):
+    def __init__(self, parent, event_name="", fontsize="", *args, **kwargs):
         Frame.__init__(self, parent, *args, **kwargs)
         self.config(bg='black')
-        self.title = 'JVacations Facial Recognition Smart Mirror' # 'News' is more internationally generic
-        self.newsLbl = Label(self, text=self.title, font=('Helvetica', large_text_size), fg="white", bg="black")
+        self.title = event_name # 'News' is more internationally generic
+        self.newsLbl = Label(self, text=self.title, font=('Helvetica', fontsize), fg="white", bg="black")
         self.newsLbl.pack(side=TOP, anchor=W)
