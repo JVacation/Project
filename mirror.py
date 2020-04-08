@@ -38,7 +38,7 @@ class FullscreenWindow:
         self.splash.pack(side=TOP, anchor=CENTER, padx=100, pady=60)
         self.cam =  cam.Cam(self.topFrame, enableCameraPreview)
         self.cam.pack( anchor=CENTER, padx=100, pady=60)
-        self.instructions = self.splash = splash.Splash(self.bottomFrame, 'Wait for the mirror to recognise your face and wait till your settings load', 28)
+        self.instructions = splash.Splash(self.bottomFrame, 'Wait for the mirror to recognise your face and wait till your settings load', 28)
         self.instructions.pack(side=BOTTOM, anchor=CENTER, padx=100, pady=60)
         self.getUserName()
         thread1.start()
@@ -76,8 +76,8 @@ class FullscreenWindow:
                 stockFrame = (p['stockFrame'])
                 stockSide = (p['stockSide'])
                 stockList = (p['stockList'])
-            self.cam.pack_forget()
             self.splash.pack_forget()
+            self.cam.pack_forget()
             self.instructions.pack_forget()
             #clock
             if clockCheckbox == 'enable': 
