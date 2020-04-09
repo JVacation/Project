@@ -12,14 +12,14 @@ from numpy import savetxt
 cap = cv2.VideoCapture(0)
 medium_text_size = 28
 
-with open('./webserver/dataset_faces.dat', 'rb') as f:
-        all_face_encodings = pickle.load(f)
+#with open('./webserver/dataset_faces.dat', 'rb') as f:
+        #all_face_encodings = pickle.load(f)
 
 # Create arrays of known face encodings and their names from the datafile
-known_face_encodings = np.array(list(all_face_encodings.values()))
+#known_face_encodings = np.array(list(all_face_encodings.values()))
 
 # Creates a list of the names from the datafile
-known_face_names = list(all_face_encodings.keys())
+#known_face_names = list(all_face_encodings.keys())
 
 # Initialize some variables
 face_locations = []
@@ -50,6 +50,12 @@ class Cam(Frame):
 
     def video(self):
         process_this_frame = True
+        # Reads pickle data from file that stores facial data # 
+        with open('./webserver/dataset_faces.dat', 'rb') as f:
+            all_face_encodings = pickle.load(f)
+        known_face_encodings = np.array(list(all_face_encodings.values()))
+        known_face_names = list(all_face_encodings.keys())
+        # --------------------------------------------------- #
         ret, frame = cap.read()
         small_frame = cv2.resize(frame, (0, 0), fx=0.25, fy=0.25)
         rgb_small_frame = small_frame[:, :, ::-1]
