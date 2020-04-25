@@ -79,8 +79,8 @@ class FullscreenWindow:
             self.splash.pack_forget()
             self.cam.pack_forget()
             self.instructions.pack_forget()
-            self.showUser = splash.Splash(self.topFrame, getName, 12)
-            self.showUser.pack(side=TOP, anchor=N, padx=0, pady=0)
+            #self.showUser = splash.Splash(self.topFrame, getName, 12)
+            #self.showUser.pack(side=TOP, anchor=N, padx=0, pady=0)
             #clock
             if clockCheckbox == 'enable': 
                 self.clock = clock.Clock(getattr(self, clockFrame))
@@ -102,7 +102,7 @@ class FullscreenWindow:
     def checkStillViewing(self):
         if self.cam.readUserName() == "No User Detected":
             print ("NO USER")
-            self.showuser.pack_forget()
+            #self.showuser.pack_forget()
             self.clock.pack_forget()
             self.weather.pack_forget()
             self.news.pack_forget()
@@ -112,7 +112,7 @@ class FullscreenWindow:
             self.instructions.pack(side=BOTTOM, anchor=CENTER, padx=100, pady=60)
             self.getUserName()
         else:
-            self.tk.after(20000, self.checkStillViewing)
+            self.tk.after(10000, self.checkStillViewing)
 
 if __name__ == '__main__':
     w = FullscreenWindow()
