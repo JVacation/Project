@@ -1,0 +1,104 @@
+<head>
+<link rel="stylesheet" type="text/css" href="css/main.css">
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--<script src="script.js"></script>-->
+</head>
+<body>
+<form id="test" action="/contact" method="post">
+    <h1> JVacation Smart Mirror</h1>
+    <div class="form-group">
+        <h2>User Info</h2>
+        <div class="form-group-wrapper">
+        <label for="fname" >First name:</label>
+        <input type="input" id="fname" name="fname" required placeholder="e.g Joe Biden" required><br>
+        </div>
+    </div>
+    <div class="form-group">
+        <h2>Clock</h2>
+        <div class="form-group-wrapper">
+    	<label for="clockCheckbox">Enable Clock?</label>
+		<input type="radio" id="enable" name="clockCheckbox" value="enable">
+		<label for="male">Enable</label>
+        <input type="radio" id="disable" name="clockCheckbox" value="disable" checked>
+        <label for="female">Disable</label><br>
+    	<label for="clockFrame">Select top or bottom frame for Clock:</label>
+    	<select name="clockFrame" class="form-control">
+    		<option value="topFrame" selected="selected">Top</option>
+    		<option value="bottomFrame">Bottom</option>
+    	</select><br>
+    	<label for="clockSide">Select Left or Right side for Clock:</label>
+    	<select name="clockSide" class="form-control">
+    		<option value="left" selected="selected">Left</option>
+    		<option value="right">Right</option>
+    	</select>
+        </div>
+    </div>
+    <div class="form-group">
+        <h2>Weather</h2>
+        <div class="form-group-wrapper">
+    	<label for="weatherCheckbox">Enable?:</label>
+		<input type="radio" id="enable" name="weatherCheckbox" value="enable">
+		<label for="weatherEnable">Enable</label>
+        <input type="radio" id="disable" name="weatherCheckbox" value="disable" checked>
+        <label for="weatherDisable">Disable</label><br>
+    	<label for="weatherFrame">Select top or bottom frame for Weather:</label>
+    	<select name="weatherFrame" class="form-control">
+    		<option value="topFrame" selected="selected">Top</option>
+    		<option value="bottomFrame">Bottom</option>
+    	</select><br>
+    	<label for="weatherSide">Select Left or Right side for Weather:</label>
+    	<select name="weatherSide" class="form-control">
+    		<option value="left" selected="selected">Left</option>
+    		<option value="right">Right</option>
+    	</select>
+        </div>
+    </div>
+    <div class="form-group">
+        <h2>News</h2>
+        <div class="form-group-wrapper">
+    	<label for="weatherCheckbox">Enable News?</label>
+		<input type="radio" id="enable" name="newsCheckbox" value="enable">
+		<label for="newsEnable">Enable</label>
+        <input type="radio" id="disable" name="newsCheckbox" value="disable" checked>
+        <label for="newsDisable">Disable</label><br>
+    	<label for="newsFrame">Select top or bottom frame for News:</label>
+    	<select name="newsFrame" class="form-control">
+    		<option value="topFrame" selected="selected">Top</option>
+    		<option value="bottomFrame">Bottom</option>
+        </select><br>
+    	<label for="newsSide">Select Left or Right side for News:</label>
+    	<select name="newsSide" class="form-control">
+    		<option value="left" selected="selected">Left</option>
+    		<option value="right">Right</option>
+    	</select>
+        </div>
+	</div>
+	<div class="form-group">
+        <h2>Stock Quotes</h2>
+        <div class="form-group-wrapper">
+    	<label for="weatherCheckbox">Enable Stock Quotes?</label>
+		<input type="radio" id="enable" name="stockCheckbox" value="enable">
+		<label for="stockEnable">Enable</label>
+        <input type="radio" id="disable" name="stockCheckbox" value="disable" checked>
+        <label for="stockDisable">Disable</label><br>
+    	<label for="stockFrame">Select top or bottom frame for Stock Quotes:</label>
+    	<select name="stockFrame" class="form-control">
+    		<option value="topFrame" selected="selected">Top</option>
+    		<option value="bottomFrame">Bottom</option>
+    	</select><br>
+    	<label for="stockSide">Select Left or Right side for Stock Quotes:</label>
+    	<select name="stockSide" class="form-control">
+    		<option value="left" selected="selected">Left</option>
+    		<option value="right">Right</option>
+    	</select><br>
+    	<label for="stockList">Enter up to 5 stocks that you want to track. Seperate with commas:</label><br>
+        <input type="input" id="stockList" name="stockList"><br>
+        </div>
+    </div>
+    <p>
+        <input type="submit" value="Submit" class="btn btn-primary btn-block" />
+    </p>
+</form>	
+<pre id="output"></pre>
+</body>

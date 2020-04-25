@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <title>Upload images to server using Node JS</title>
+    <script src="scripts/jquery-3.4.1.min.js"></script>
+    <script src="scripts/jquery.form.min.js"></script>
+    <script>
+    $(document).ready(function() {
+                var options = {
+                        beforeSubmit: showRequest, // pre-submit callback success: showResponse // post-submit callback }; // bind to the form's submit event $('#frmUploader').submit(function () { $(this).ajaxSubmit(options); // always return false to prevent standard browser submit and page navigation return false; }); }); // pre-submit callback function showRequest(formData, jqForm, options) { alert('Uploading is starting.'); return true; } // post-submit callback function showResponse(responseText, statusText, xhr, $form) { alert('status: ' + statusText + '\n\nresponseText: \n' + responseText ); }
+    </script>
+</head>
+<body>
+<form id="frmUploader" enctype="multipart/form-data" action="api/Upload/" method="post">
+<h1> JVacation Smart Mirror</h1>
+<div class="form-group">
+    <h2> Your config file has been submitted!</h2>
+<div class="form-group-wrapper">
+    <p>Now that you have created your "config" for the smart mirror you will need to upload some photos of yourself so that the mirror can recognise you on use. Please upload photos using the upload tool below and make sure that the photo only has your face in it. If you wear glasses I would suggest uploading one with glasses and one without to make facial recognition easier. When you upload the photos you will navigated to a confirmation page. The next page will contain a finish button which will take the data from the photos and delete the photos from the system. The facial data is then only stored in a singular file called dataset_files.dat<br><br>Make sure to select all photos when you click choose files below.<br><br>If you have upload photos before and you just wanted to change your config settings then you can exit this page.<br><br></p>
+    <input type="file" name="imgUploader" multiple />
+    <input type="submit" name="submit" id="btnSubmit" value="Upload" /></div></div> </form>
+</body>
+</html>
