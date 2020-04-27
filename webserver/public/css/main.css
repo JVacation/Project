@@ -1,0 +1,33 @@
+body {
+  margin: 2em auto;
+  max-width: 50%;
+  text-align: center;
+  background-color: white;
+  height: 100%;
+}
+
+form div {
+    margin-bottom: 0.5em;
+}
+form div label, form div input {
+}
+
+.form-group {
+    padding: 10px;
+}
+
+form {
+}
+
+.header{
+    height: 10%;
+    vertical-align: middle;
+    width: 100%;
+    
+}
+
+.wrapper {
+    border-radius: 25px;
+    border: 2px solid cyan;
+    padding: 20px;
+}
