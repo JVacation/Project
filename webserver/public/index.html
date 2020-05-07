@@ -2,16 +2,34 @@
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!--<script src="script.js"></script>-->
+<script>
+function generateString() {
+	var letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+	var lettersLength = letters.length;
+	var genString = "";
+	for (var i = 0; i < 5; i++) {
+		genString += letters.charAt(Math.floor(Math.random() * lettersLength));
+	}
+	document.getElementById('fname').value=genString;
+}
+
+function myFunction() {
+    var colors = ['#ff0000', '#00ff00', '#0000ff'];
+    var random_color = colors[Math.floor(Math.random() * colors.length)];
+    document.getElementsByTagName('h2').style.backgroundColor = random_color;
+}
+</script>
 </head>
-<body>
+<body onload="myFunction()">
 <form id="test" action="/contact" method="post">
     <h1> JVacation Smart Mirror</h1>
     <div class="form-group">
         <h2>User Info</h2>
         <div class="form-group-wrapper">
-        <label for="fname" >First name:</label>
-        <input type="input" id="fname" name="fname" required placeholder="e.g Joe Biden" required><br>
+        <p><b>New Users click the "Generate" button below to create a unique ID. Returning users enter your unique ID below.</b></p>
+        <label for="fname" >Unique ID:</label>
+        <input maxlength='5' type="input" id="fname" name="fname" required placeholder="e.g ABDCE" required>
+        <button id="generate" type="button" onclick="generateString()">Generate ID</button><br>
         </div>
     </div>
     <div class="form-group">
