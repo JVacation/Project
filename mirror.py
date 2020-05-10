@@ -61,6 +61,7 @@ class FullscreenWindow:
                 newsCheckbox = (p['newsCheckbox'])
                 newsFrame = (p['newsFrame'])
                 newsSide = (p['newsSide'])
+                newsCategory = (p['newsCategory'])
                 stockCheckbox = (p['stockCheckbox'])
                 stockFrame = (p['stockFrame'])
                 stockSide = (p['stockSide'])
@@ -83,7 +84,7 @@ class FullscreenWindow:
                 self.weather.pack(side=weatherSide, anchor=N, padx=100, pady=60)
             #news
             if newsCheckbox == 'enable':
-                self.news = news.News(getattr(self, newsFrame))
+                self.news = news.News(getattr(self, newsFrame), newsSide, newsCategory)
                 self.news.pack(side=newsSide, anchor=S, padx=100, pady=60)
             #stock
             if stockCheckbox == 'enable':
