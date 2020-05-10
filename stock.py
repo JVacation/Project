@@ -26,7 +26,7 @@ class Stock(Frame):
         for stock in self.stockList:
             stocks = listStocks(self.headlinesContainer, stock)
             stocks.pack(side=TOP, anchor=N)
-        self.after(600000, self.get_stocks)
+        self.after(5000, self.get_stocks)
 
 
 class listStocks(Frame):
