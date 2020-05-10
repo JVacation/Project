@@ -12,7 +12,11 @@ from Naked.toolshed.shell import execute_js
 
 getName = ""
 enableCameraPreview = "enable"
-
+clockCheckbox = ""
+weatherCheckbox = ""
+newsCheckbox = ""
+stockCheckbox = ""
+quoteCheckbox = ""
 class startWebServer (threading.Thread):
     def __init__(self):
       threading.Thread.__init__(self)
@@ -75,8 +79,8 @@ class FullscreenWindow:
                 self.quotes = quotes.Quotes(self.bottomFrame)
                 self.quotes.pack(anchor=N, padx=100, pady=60)
             #clock
-            if clockCheckbox == 'enable': 
-                self.clock = clock.Clock(getattr(self, clockFrame))
+            if clockCheckbox == 'enable':
+                self.clock = clock.Clock(getattr(self, clockFrame)) 
                 self.clock.pack(side=clockSide, anchor=N, padx=100, pady=60)
             #weather
             if weatherCheckbox == 'enable':
@@ -96,13 +100,15 @@ class FullscreenWindow:
         if self.cam.readUserName() == "No User Detected":
             print ("NO USER")
             #self.showuser.pack_forget()
-            self.quotes.pack_forget()
-            self.clock.pack_forget()
-            self.weather.pack_forget()
-            self.news.pack_forget()
-            self.stock.pack_forget()
+            for widget in self.topFrame.winfo_children():
+                widget.destroy()
+            for widget in self.bottomFrame.winfo_children():
+                widget.destroy()
+            self.splash = splash.Splash(self.topFrame, 'JVacations Facial Recognition Smart Mirror', 48)
             self.splash.pack(side=TOP, anchor=CENTER, padx=100, pady=60)
-            self.cam.pack(side=TOP, anchor=CENTER, padx=100, pady=60)
+            self.cam =  cam.Cam(self.topFrame, enableCameraPreview)
+            self.cam.pack( anchor=CENTER, padx=100, pady=60)
+            self.instructions = splash.Splash(self.bottomFrame, 'Wait for the mirror to recognise your face and wait till your settings load', 28)
             self.instructions.pack(side=BOTTOM, anchor=CENTER, padx=100, pady=60)
             self.getUserName()
         else:
