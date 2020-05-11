@@ -31,7 +31,7 @@ class FullscreenWindow:
         self.tk = Tk()
         self.tk.configure(background='black')
         self.topFrame = Frame(self.tk, background = 'black')
-        self.bottomFrame = Frame(self.tk, background = 'black')
+        self.bottomFrame = Frame(self.tk, background = 'blue')
         self.topFrame.pack(side = TOP, fill=BOTH, expand = YES)
         self.bottomFrame.pack(side = BOTTOM, fill=BOTH, expand = YES)
         self.state = False
@@ -81,19 +81,31 @@ class FullscreenWindow:
             #clock
             if clockCheckbox == 'enable':
                 self.clock = clock.Clock(getattr(self, clockFrame)) 
-                self.clock.pack(side=clockSide, anchor=N, padx=100, pady=60)
+                if clockFrame == 'topFrame':
+                    self.clock.pack(side=clockSide, anchor=N, padx=100, pady=60)
+                else:
+                    self.clock.pack(side=clockSide, anchor=S, padx=100, pady=60)
             #weather
             if weatherCheckbox == 'enable':
                 self.weather = weather.Weather(getattr(self, weatherFrame), weatherSide)
-                self.weather.pack(side=weatherSide, anchor=N, padx=100, pady=60)
+                if weatherFrame == 'topFrame':
+                    self.weather.pack(side=weatherSide, anchor=N, padx=100, pady=60)
+                else:
+                    self.weather.pack(side=weatherSide, anchor=S, padx=100, pady=60)
             #news
             if newsCheckbox == 'enable':
                 self.news = news.News(getattr(self, newsFrame), newsSide, newsCategory)
-                self.news.pack(side=newsSide, anchor=S, padx=100, pady=60)
+                if newsFrame == 'topFrame':
+                    self.news.pack(side=newsSide, anchor=N, padx=100, pady=60)
+                else:
+                    self.news.pack(side=newsSide, anchor=S, padx=100, pady=60)
             #stock
             if stockCheckbox == 'enable':
-                self.stock = stock.Stock(getattr(self, newsFrame), stockList)
-                self.stock.pack(side=stockSide, anchor=S, padx=100, pady=60)
+                self.stock = stock.Stock(getattr(self, stockFrame), stockList)
+                if stockFrame == 'topFrame':
+                    self.stock.pack(side=stockSide, anchor=N, padx=100, pady=60)
+                else:
+                    self.stock.pack(side=stockSide, anchor=S, padx=100, pady=60)
             self.checkStillViewing()
 
     def checkStillViewing(self):

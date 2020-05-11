@@ -33,7 +33,7 @@ class News(Frame):
         except Exception as e:
             traceback.print_exc()
             print (("%s UNABLE TO RETRIEVE NEWS" % e))
-        self.after(600000, self.getBreakingNews)
+        self.after(12000, self.getBreakingNews)
 
 class retrieveNewsLine(Frame):
     def __init__(self, parent, postName="", event_name=""):

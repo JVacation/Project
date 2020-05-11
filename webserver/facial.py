@@ -17,7 +17,6 @@ if os.path.exists('./webserver/dataset_faces.dat'):
 # Load the jpg file into a numpy array
 i = 1
 directory = './webserver/public/images/'
-known_face_names = []
 
 for subdir, dirs, files in os.walk(directory):
     for file in files:
