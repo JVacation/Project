@@ -13,20 +13,20 @@ medText = 28
 smallText = 18
 
 			
-imageList = {
-    'clear-day': "assets/Sun.png",  # clear sky day
-    'wind': "assets/Wind.png",   #wind
-    'cloudy': "assets/Cloud.png",  # cloudy day
-    'partly-cloudy-day': "assets/PartlySunny.png",  # partly cloudy day
-    'rain': "assets/Rain.png",  # rain day
-    'snow': "assets/Snow.png",  # snow day
-    'snow-thin': "assets/Snow.png",  # sleet day
-    'fog': "assets/Haze.png",  # fog day
-    'clear-night': "assets/Moon.png",  # clear sky night
-    'partly-cloudy-night': "assets/PartlyMoon.png",  # scattered clouds night
-    'thunderstorm': "assets/Storm.png",  # thunderstorm
-    'tornado': "assests/Tornado.png",    # tornado
-    'hail': "assests/Hail.png"  # hail
+imageList = { 
+    'wind': "assets/wind.png",   
+    'cloudy': "assets/cloud.png", 
+    'partly-cloudy-day': "assets/partsun.png",
+    'thunderstorm': "assets/storm.png", 
+    'rain': "assets/rain.png",
+    'tornado': "assests/twister.png",
+    'hail': "assests/hailing.png"
+    'snow-thin': "assets/snow.png",    
+    'snow': "assets/snow.png",
+    'clear-day': "assets/sun.png", 
+    'fog': "assets/mist.png",
+    'partly-cloudy-night': "assets/partmoon.png",  
+    'clear-night': "assets/clearmoon.png",      
 }
 
 class Weather(Frame):
@@ -51,21 +51,11 @@ class Weather(Frame):
         self.forecastLbl.pack(side=TOP)
         self.grabWeather()
 
-    def get_ip(self):
-        try:
-            ip_url = "http://jsonip.com/"
-            req = requests.get(ip_url)
-            ip_json = json.loads(req.text)
-            return ip_json['ip']
-        except Exception as e:
-            traceback.print_exc()
-            return "Error: %s. Cannot get ip." % e
-
     def grabWeather(self):
         try:
             if latitude is None and longitude is None:
                 # get location
-                locURL = "http://api.ipstack.com/%s?access_key=%s" % (self.get_ip(),locationApiToken)
+                locURL = "http://api.ipstack.com/%s?access_key=%s" % (self.ip(),locationApiToken)
                 request = requests.get(locURL)
                 locObject = json.loads(request.text)
                 lat = locObject['latitude']
@@ -76,8 +66,7 @@ class Weather(Frame):
             else:
                 currentLocv2 = ""
                 # get weather
-                weatherURL = "https://api.darksky.net/forecast/%s/%s,%s?lang=%s&units=%s" % (apiToken, latitude, longitude, language,weathUnit)
-
+                weatherURL = "https://api.darksky.net/forecast/%s/%s,%s?lang=%s&units=%s" % (apiToken, lat, lon, language,weathUnit)
             request = requests.get(weatherURL)
             weathObj = json.loads(request.text)
             tempv2 = "%s%s" % (str(int(weathObj['currently']['temperature'])), '\N{DEGREE SIGN}')
@@ -126,6 +115,7 @@ class Weather(Frame):
 
         self.after(600000, self.grabWeather)
 
-    @staticmethod
-    def convert_kelvin_to_fahrenheit(kelvin_temp):
-        return 1.8 * (kelvin_temp - 273) + 32
+    def ip(self):
+        requestIP = requests.get("http://jsonip.com/")
+        jsonIP = json.loads(requestIP.text)
+        return jsonIP['ip']

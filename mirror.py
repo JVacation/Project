@@ -1,7 +1,3 @@
-# smartmirror.py
-# requirements
-# requests, feedparser, traceback, Pillow
-
 from tkinter import *
 #from mttkinter import mtTkinter as tk
 import locale,threading
