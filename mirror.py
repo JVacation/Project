@@ -1,13 +1,14 @@
 from tkinter import *
 #from mttkinter import mtTkinter as tk
 import locale,threading
+import socket
 from PIL import Image, ImageTk
 import clock, news, weather, cam, stock, splash, quotes
 import json, time
 from Naked.toolshed.shell import execute_js
 
 getName = ""
-enableCameraPreview = "enable"
+enableCameraPreview = "disable"
 clockCheckbox = ""
 weatherCheckbox = ""
 newsCheckbox = ""
@@ -27,7 +28,7 @@ class FullscreenWindow:
         self.tk = Tk()
         self.tk.configure(background='black')
         self.topFrame = Frame(self.tk, background = 'black')
-        self.bottomFrame = Frame(self.tk, background = 'blue')
+        self.bottomFrame = Frame(self.tk, background = 'black')
         self.topFrame.pack(side = TOP, fill=BOTH, expand = YES)
         self.bottomFrame.pack(side = BOTTOM, fill=BOTH, expand = YES)
         self.state = False
@@ -37,8 +38,10 @@ class FullscreenWindow:
         self.splash.pack(side=TOP, anchor=CENTER, padx=100, pady=60)
         self.cam =  cam.Cam(self.topFrame, enableCameraPreview)
         self.cam.pack( anchor=CENTER, padx=100, pady=60)
-        self.instructions = splash.Splash(self.bottomFrame, 'Wait for the mirror to recognise your face and wait till your settings load', 28)
-        self.instructions.pack(side=BOTTOM, anchor=CENTER, padx=100, pady=60)
+        self.instructions1 = splash.Splash(self.bottomFrame, "To add or edit users visit: " + socket.gethostbyname(socket.gethostname()) + ":3000", 28)
+        self.instructions1.pack(side=BOTTOM, anchor=N, padx=100, pady=20)
+        self.instructions2 = splash.Splash(self.bottomFrame,"Stand in front of the mirror until the mirror recognises you and loads your settings.", 28)
+        self.instructions2.pack(side=BOTTOM, anchor=N, padx=100, pady=20)
         self.getUserName()
         thread1.start()
 
@@ -69,7 +72,8 @@ class FullscreenWindow:
                 quoteCheckbox = (p['quoteCheckbox'])
             self.splash.pack_forget()
             self.cam.pack_forget()
-            self.instructions.pack_forget()
+            self.instructions1.pack_forget()
+            self.instructions2.pack_forget()
             #Quotes
             if quoteCheckbox == 'enable':
                 self.quotes = quotes.Quotes(self.bottomFrame)
@@ -116,8 +120,10 @@ class FullscreenWindow:
             self.splash.pack(side=TOP, anchor=CENTER, padx=100, pady=60)
             self.cam =  cam.Cam(self.topFrame, enableCameraPreview)
             self.cam.pack( anchor=CENTER, padx=100, pady=60)
-            self.instructions = splash.Splash(self.bottomFrame, 'Wait for the mirror to recognise your face and wait till your settings load', 28)
-            self.instructions.pack(side=BOTTOM, anchor=CENTER, padx=100, pady=60)
+            self.instructions1 = splash.Splash(self.bottomFrame, "To add or edit users visit: " + socket.gethostbyname(socket.gethostname()) + ":3000", 28)
+            self.instructions1.pack(side=BOTTOM, anchor=N, padx=100, pady=20)
+            self.instructions2 = splash.Splash(self.bottomFrame,"Stand in front of the mirror until the mirror recognises you and loads your settings.", 28)
+            self.instructions2.pack(side=BOTTOM, anchor=N, padx=100, pady=20)
             self.getUserName()
         else:
             self.tk.after(10000, self.checkStillViewing)

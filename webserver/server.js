@@ -81,7 +81,9 @@ app.post("/complete", function(req, res) {
 
  
 app.use(express.static(__dirname + '/public'))
-app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
+app.listen(3000, '0.0.0.0', function() {
+    console.log('Listening to port:  ' + 3000);
+});
 
 
 

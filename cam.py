@@ -33,7 +33,7 @@ class Cam(Frame):
         Frame.__init__(self, parent, bg='black')
         self.title = "Unknown"
         # Displays the name of detected user
-        self.infoText = "Recongising Face: "
+        self.infoText = "Recognising Face: "
         self.info = Label(self, text=self.infoText, font=('Helvetica', medium_text_size), fg="blue", bg="black")
         self.userName = Label(self, text=self.title, font=('Helvetica', medium_text_size), fg="white", bg="black")
         if event_name != "enable":
