@@ -6,6 +6,10 @@ import face_recognition
 import numpy as np
 import pickle
 from numpy import savetxt
+import datetime
+import time
+import os.path
+
 
 
 # Capture from camera
@@ -25,6 +29,11 @@ medium_text_size = 28
 face_locations = []
 face_encodings = []
 face_names = []
+
+#
+image_path = "./security/"
+start = datetime.time(8, 30)
+end = datetime.time(15)
 
 # function for video streaming
 
@@ -74,6 +83,20 @@ class Cam(Frame):
                 if matches[best_match_index]:
                     name = known_face_names[best_match_index]
                     self.userName.config(text = name)
+                else:
+                     # Unknown user detected during time range#
+                    timestamp = datetime.datetime.now().time()
+                    check = start <= timestamp <= end
+                    if check == True:
+                        timestamp2 = datetime.datetime.now()
+                        timestampStr = timestamp2.strftime("%d_%b_%Y__%H_%M_%S")
+                        timestampStrFilePath = timestamp2.strftime("%d_%b_%Y")
+                        directory = image_path + timestampStrFilePath + "/"
+                    if not os.path.isdir(directory):
+                        os.mkdir(directory)
+                    filename = timestampStr + ".jpg"
+                    filepath = os.path.join(directory, filename)
+                    cv2.imwrite(filepath, frame)
                 face_names.append(name)
         process_this_frame = not process_this_frame
         for (top, right, bottom, left), name in zip(face_locations, face_names):
@@ -90,6 +113,9 @@ class Cam(Frame):
         self.lmain.imgtk = imgtk
         self.lmain.configure(image=imgtk)
         self.lmain.after(1, self.video)
+    
+        
+       
 
     
     

@@ -8,7 +8,7 @@ import json, time
 from Naked.toolshed.shell import execute_js
 
 getName = ""
-enableCameraPreview = "disable"
+enableCameraPreview = "enable"
 clockCheckbox = ""
 weatherCheckbox = ""
 newsCheckbox = ""

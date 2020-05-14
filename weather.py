@@ -2,17 +2,17 @@ from tkinter import *
 import requests,json,traceback
 from PIL import Image, ImageTk
 
-apiToken = 'f4b64fa2896f793c58ff296ca4876ab6' # create account at https://darksky.net/dev/
-locationApiToken = '7cbae623103ed2b984af6751946ac77c' # www.ipstack.com
-language = 'en' # see https://darksky.net/dev/docs/forecast for full list of language parameters values
-weathUnit = 'uk2' # see https://darksky.net/dev/docs/forecast for full list of unit parameters values
-lat = None # Set this if IP location lookup does not work for you (must be a string)
-lon = None # Set this if IP location lookup does not work for you (must be a string)
+apiToken = 'f4b64fa2896f793c58ff296ca4876ab6' # API Key for DarkSky - No longer able to get an APIkey
+locationApiToken = '7cbae623103ed2b984af6751946ac77c' # APIKey for IPSTACK
+language = 'en'
+weathUnit = 'uk2'
+lat = None
+lon = None
 xlText = 94
 medText = 28
 smallText = 18
 
-			
+# List of Images Used for Weather Icons #			
 imageList = { 
     'wind': "assets/wind.png",   
     'cloudy': "assets/cloud.png", 
@@ -29,6 +29,7 @@ imageList = {
     'clear-night': "assets/clearmoon.png"      
 }
 
+# Main Widget Frame #
 class Weather(Frame):
     def __init__(self, parent, *args, **kwargs):
         Frame.__init__(self, parent, bg='black')
@@ -37,6 +38,7 @@ class Weather(Frame):
         self.image = ''
         self.current = ''
         self.temp = ''
+
         # Packing Frame with Labels #
         self.currentLocLbl = Label(self, font=('Helvetica', smallText), fg="white", bg="black")
         self.currentLocLbl.pack(side=TOP)
@@ -50,6 +52,7 @@ class Weather(Frame):
         self.currentLbl.pack(side=TOP)
         self.forecastLbl = Label(self, font=('Helvetica', smallText), fg="white", bg="black")
         self.forecastLbl.pack(side=TOP)
+
         # Calling Weather Function #
         self.grabWeather()
 
