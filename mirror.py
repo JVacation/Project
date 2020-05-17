@@ -1,5 +1,4 @@
 from tkinter import *
-#from mttkinter import mtTkinter as tk
 import locale,threading
 import socket
 from PIL import Image, ImageTk
