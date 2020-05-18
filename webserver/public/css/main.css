@@ -1,0 +1,185 @@
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  -o-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: "Roboto";
+  font-weight: 100;
+  font-size: 16px;
+  line-height: 30px;
+  color: #777;
+  background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(76, 175, 80, 0.45)),url("../background.jpg");
+  max-width: 40%;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+@media screen and (min-width : 200px) and (max-width : 1325px) {
+    body {
+        max-width: 100%;
+        margin: 0;
+    }
+}
+
+form {
+    border-radius: 10px;
+}
+
+form div {
+    margin-bottom: 0.5em;
+}
+form div label, form div input {
+}
+
+.form-group {
+    border-radius: 5px;
+    width: 100%;
+    border: 1px solid #ccc;
+    background: #FFF;
+    margin: 0 0 5px;
+}
+
+#generate {
+  margin: 0 auto;
+  cursor: pointer;
+  border: none;
+  background: #4CAF50;
+  color: #FFF;
+  margin: 0 0 5px;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-family: "Roboto";
+}
+
+#generate:hover {
+    background: #8aff8e;
+}
+
+.form-group-wrapper {
+    padding: 5px;
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+h2 {
+    text-align: center;
+    width: 100%;
+    background: #4CAF50;
+    color: white;
+}
+.form-group:hover {
+  -webkit-transition: border-color 0.3s ease-in-out;
+  -moz-transition: border-color 0.3s ease-in-out;
+  transition: border-color 0.3s ease-in-out;
+  border: 1px solid #aaa;
+}
+
+#test {
+  background: #F9F9F9;
+  padding: 20px;
+  margin: 150px 0;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+#frmUploader {
+  background: #F9F9F9;
+  padding: 20px;
+  margin: 150px 0;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+#complete {
+  background: #F9F9F9;
+  padding: 20px;
+  margin: 150px 0;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+#test input[id="stockList"],
+#test input[id="fname"]{
+    height: 3%;
+    padding: 10;
+    border-radius: 5px;
+    border: 1px solid #4CAF50;
+}
+#test input[id="stockList"] {
+    width: 100%;
+}
+#test input[type="submit"] {
+  cursor: pointer;
+  width: 100%;
+  border: none;
+  background: #4CAF50;
+  color: #FFF;
+  margin: 0 0 5px;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-family: "Roboto"
+}
+
+select {
+    border: 1px solid green;
+    border-radius: 5px;
+}
+
+#frmUploader input[type="submit"] {
+cursor: pointer;
+  width: 100%;
+  border: none;
+  background: #4CAF50;
+  color: #FFF;
+  margin: 0 0 5px;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-family: "Roboto"
+}
+
+#frmUploader input[type="file"] {
+  width: 100%;
+  border: none;
+  background: #dee3e0;
+  color: ;
+  margin: 0 0 5px;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-family: "Roboto"
+}
+
+#complete input[type="submit"] {
+cursor: pointer;
+  width: 100%;
+  border: none;
+  background: #4CAF50;
+  color: #FFF;
+  margin: 0 0 5px;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-family: "Roboto"
+}
+
+
+

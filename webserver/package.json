@@ -1,0 +1,16 @@
+{
+    "name": "node_js_file_upload",
+    "version": "0.0.1",
+    "description": "Node_JS_File_Upload",
+    "main": "server.js",
+    "dependencies": {
+        "body-parser": "^1.15.2",
+        "express": "^4.14.0",
+        "jquery": "^3.4.1",
+        "multer": "^1.2.0",
+        "python-shell": "^1.0.8"
+    },
+    "author": {
+        "name": "JVacation"
+    }
+}
